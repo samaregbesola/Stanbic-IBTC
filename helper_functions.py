@@ -124,6 +124,7 @@ class feature_engineering_functions:
         self.df['month'] = self.df[column].dt.strftime('%B')
         self.df['day_of_week'] = self.df[column].dt.strftime('%A')
         self.df['hour'] = self.df[column].dt.hour
+        self.df['time_of_day'] = self.df['hour'].apply(lambda x: 'morning' if 5<=x<12 else 'afternoon' if 12<=x<17 else 'evening' if 17<=x<21 else 'night') 
         self.df['is_weekend'] = self.df[column].dt.weekday.apply(lambda x: 1 if x > 4 else 0)
         # return the dataframe
         return self.df
@@ -148,6 +149,91 @@ class feature_engineering_functions:
         # return the dataframe
         return self.df
 
+
+# create class for plotting
+class plotting_functions:
+    def __init__(self, df):
+        self.df = df
+
+    # plot the count plot
+    def plot_count_plot(self, column):
+        """
+        This function will plot the count plot
+        """
+        # plot the count plot
+        sns.countplot(x=column, data=self.df)
+        # show the plot
+        plt.show()
+
+    # plot the box plot
+    def plot_box_plot(self, x, y):
+        """
+        This function will plot the box plot
+        """
+        # plot the box plot
+        sns.boxplot(x=x, y=y, data=self.df)
+        # show the plot
+        plt.show()
+
+    # plot the bar plot
+    def plot_bar_plot(self, x, y):
+        """
+        This function will plot the bar plot
+        """
+        # plot the bar plot
+        sns.barplot(x=x, y=y, data=self.df)
+        # show the plot
+        plt.show()
+
+    # plot the scatter plot
+    def plot_scatter_plot(self, x, y):
+        """
+        This function will plot the scatter plot
+        """
+        # plot the scatter plot
+        sns.scatterplot(x=x, y=y, data=self.df)
+        # show the plot
+        plt.show()
+
+    # plot the line plot
+    def plot_line_plot(self, x, y):
+        """
+        This function will plot the line plot
+        """
+        # plot the line plot
+        sns.lineplot(x=x, y=y, data=self.df)
+        # show the plot
+        plt.show()
+
+    # plot the histogram
+    def plot_histogram(self, column):
+        """
+        This function will plot the histogram
+        """
+        # plot the histogram
+        sns.histplot(self.df[column])
+        # show the plot
+        plt.show()
+
+    # plot the distribution plot
+    def plot_dist_plot(self, column):
+        """
+        This function will plot the distribution plot
+        """
+        # plot the distribution plot
+        sns.distplot(self.df[column])
+        # show the plot
+        plt.show()
+
+    # plot the heatmap
+    def plot_heatmap(self):
+        """
+        This function will plot the heatmap
+        """
+        # plot the heatmap
+        sns.heatmap(self.df.corr(), annot=True)
+        # show the plot
+        plt.show()
 
 # create a class for time series analysis
 class time_series_functions:
