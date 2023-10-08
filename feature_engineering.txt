@@ -1,8 +1,0 @@
-get posts with links
-
-get length of posts
-
-split time to morning afternoon night and check how they perform
-
------------------
-drop organic impressions. Has the same values as impressions
